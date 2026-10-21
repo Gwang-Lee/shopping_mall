@@ -31,17 +31,24 @@ const db = process.env.DATABASE_URL
             : new pg.Pool({
                 host: "localhost",
                 user: "jsuser",
-                
+                password: "pwjs",
+                database: "jsdb"
             })
 
-// mysql dbms에 연결
-db.connect((err) => {
+// 쉬고 있는 연결에서 오류가 나도 서버가 종료되지 않도록 처리
+db.on("error", (err) => {
+    console.log("PostgreSQL 연결 오류!! ", err);
+})
+
+// PostgreSQL에 연결 확인
+// "SELECT 1" - 테스트용 쿼리
+db.query("SELECT 1", (err) => {
     if(err){
-        console.error("DB 연결 오류!!", err);
+        console.log("PostgreSQL 연결 오류!!", err);
         return;
     }
-    console.log("데이터베이스에 연결했습니다.")
-});
+    console.log("PostgreSQL 연결 성공!!");
+})
 
 // 기본 라우트 설정
 app.get('/', (req, res) => {
