@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../api/api";
+import dayjs from 'dayjs'
 
 const ProductInfo = () => {
     // URL의 경로 추출(받기)
@@ -21,7 +22,21 @@ const ProductInfo = () => {
             }
         }
         fetchProduct();
-    })
+    }, [id]);
+
+    // 상품 삭제 구현
+    const handleDelete = async() => {
+        if(window.confirm("정말 삭제하시겠습니까?"))
+            {
+            try {
+                await api.delete(`/products/${id}`);
+                alert("상품이 삭제되었습니다.");
+                navigate("/products"); // 목록보기로 이동
+                } catch (error) {
+                alert("상품 삭제 중 오류가 발생했습니다.", error);
+                }
+            }
+    }
 
     return(
         <div className="product-info">
@@ -29,10 +44,15 @@ const ProductInfo = () => {
             {product && (<div className="detail">
                             <p>상품명: {product.product_name}</p>
                             <p>가격: {product.price}원</p>
-                            <p>: {product.created_at}원</p>
-                        </div>)}
+                            <p>설명: {product.description}</p>
+                            <p>등록일: {dayjs(product.created_at).format("YYYY-MM-DD HH:mm:ss")}</p>
+                        </div>
+            )}
+            {/* 상품수정, 삭제, 목록보기 버튼 */}
             <div>
                 <button onClick={() => {navigate('/products')}}>목록 보기</button>
+                <button onClick={() => {navigate(`/products/update/${id}`)}}>수정</button>
+                <button onClick={handleDelete}>삭제</button>
             </div>
         </div>
     )

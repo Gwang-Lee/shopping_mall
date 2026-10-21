@@ -31,6 +31,10 @@
 .main img{margin-top: 20px;}
 
 /* 상품 목록 스타일 */
+.product-list .search-bar input{
+  width: 300px;
+  padding: 6px 12px;
+}
 .product-list table{
   width: 60%;
   margin: 20px auto;
@@ -88,6 +92,31 @@
   resize: vertical; /* 크기 조절 방향(수직) */
 }
 .add-product form button{
+  margin: 4px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+/* 상품 수정 폼 */
+.update-product form{
+  width: 30%;
+  margin: 20px auto;
+}
+.update-product form label{
+  display: block;  /* 수직 배치 */
+  margin-bottom: 8px;
+  text-align: left;
+}
+.update-product form input, 
+.update-product form textarea{
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 16px;
+}
+.update-product form textarea{
+  resize: vertical; /* 크기 조절 방향(수직) */
+}
+.update-product form button{
   margin: 4px;
   padding: 6px 12px;
   cursor: pointer;
@@ -156,5 +185,3 @@
   padding: 8px 16px;
   margin: 5px;
 }
-
-.container
