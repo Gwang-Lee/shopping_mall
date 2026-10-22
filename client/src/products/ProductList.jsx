@@ -17,16 +17,16 @@ const ProductList = () => {
                 const response = await api.get('/products');
                 setProducts(response.data) // data 속성 불러줌
             }catch(error){
-                console.log("상품 목록 조회 에러: ", err);
+                console.log("상품 목록 조회 에러: ", error);
             }
         }
         fetchProducts();  //함수 호출해야 실행됨
     }, []); //최초 1번 렌더링
 
     // 검색된 상품 (목록) 필터링 구현
-    const filterProducts = products.filter(product =>
-        product.product_name.toLowerCase().includes(searchKeyword.toLocaleLowerCase())
-    )
+    const filterProducts = (Array.isArray(products) ? products : []).filter(product =>
+    product?.product_name?.toLowerCase().includes(searchKeyword.toLowerCase())
+    );
 
     return(
         <div className="product-list">
