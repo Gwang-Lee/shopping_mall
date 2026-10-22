@@ -161,9 +161,9 @@ app.post("/api/users", (req, res) => {
             + "values ($1, $2, $3);"
     db.query(sql, [username, password, email], (err) => {
         if(err){
-            console.log("회원 조회 에러: ", err);
+            console.log("회원 가입 에러: ", err);
             // 500: 코드 오류, 404: 페이지 없음, 200: 정상
-            res.send("회원 조회 중 오류가 발생했습니다.");
+            res.send("회원 가입 중 오류가 발생했습니다.");
             return;
             } 
         res.send("회원이 성공적으로 가입되었습니다.");
@@ -173,7 +173,7 @@ app.post("/api/users", (req, res) => {
 // 회원 조회(로그인)
 app.get("/api/users/:username", (req, res) => {
     const username = req.params.username;
-    const sql = "SELECT * FROM users WHERE username =?";
+    const sql = "SELECT * FROM users WHERE username =$1";
     db.query(sql, [username], (err, result) => {
         if(err){
             console.log("회원 조회 에러: ", err);
@@ -181,7 +181,7 @@ app.get("/api/users/:username", (req, res) => {
             res.send("회원 조회 중 오류가 발생했습니다.");
             return;
         } 
-        res.json(result.rows[0]); // 요청한 곳으로 
+        res.json(result.rows[0]); // 요청한 곳으로 반환(응답)
     });
 })
 
