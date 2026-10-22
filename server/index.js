@@ -11,8 +11,17 @@ const PORT = process.env.PORT || 8000;
 
 // cors(Cross-Orgin Resource Sharing, 교차출처 리소스 공유)
 // 브라우저가 보안상의 이유로 api 요청을 차단 방지 라이브러리
+const allowedOrigins = new Set([
+    "http://localhost:5173",
+    "https://shopping-mall-1-zqta.onrender.com",
+    ...(process.env.CLIENT_URL || "")
+        .split(",")
+        .map((origin) => origin.trim().replace(/\/+$/, ""))
+        .filter(Boolean),
+]);
+
 app.use(cors({
-    origin: process.env.CLIENT_URL ||  "http://localhost:5173",
+    origin: [...allowedOrigins],
 }))
 
 // postgreSQL 연결 설정

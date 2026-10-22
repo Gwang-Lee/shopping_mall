@@ -24,7 +24,7 @@ VITE_API_URL=https://<백엔드-서비스-이름>.onrender.com/api
 백엔드 Web Service에는 `CLIENT_URL`을 프런트엔드 Static Site의 origin(주소 끝에 `/`나 경로 없이)으로 설정합니다.
 
 ```text
-CLIENT_URL=https://<프런트엔드-서비스-이름>.onrender.com
+CLIENT_URL=https://shopping-mall-1-zqta.onrender.com
 ```
 
-`VITE_API_URL`은 프런트엔드 빌드 시 적용되므로 값을 추가하거나 변경한 뒤에는 Static Site를 다시 배포해야 합니다. 로그인 요청 응답이 앱의 HTML 페이지라면 먼저 이 값이 백엔드 URL을 가리키는지, 그리고 `/api`가 포함되어 있는지 확인하세요.
+다른 프런트엔드 origin도 허용해야 한다면 `CLIENT_URL`에 쉼표로 구분해 추가합니다. `VITE_API_URL`은 프런트엔드 빌드 시 적용되므로 값을 추가하거나 변경한 뒤에는 Static Site를 다시 배포해야 합니다. `CLIENT_URL` 변경이나 CORS 코드 변경 후에는 백엔드 Web Service도 다시 배포해야 합니다. 로그인 요청 응답이 앱의 HTML 페이지라면 먼저 `VITE_API_URL`이 백엔드 URL을 가리키는지, 그리고 `/api`가 포함되어 있는지 확인하세요.
