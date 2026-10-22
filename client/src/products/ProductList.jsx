@@ -1,7 +1,6 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../api/api";
-import { useEffect, useState } from "react";
-import AddProduct from "./AddProduct";
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
@@ -57,7 +56,7 @@ const ProductList = () => {
                 </tbody>
             </table>
             <div className="btn-add">
-                <Link to="/AddProduct">
+                <Link to="/products/new">
                     <button type="button">상품 등록</button>   
                 </Link> 
             </div>
