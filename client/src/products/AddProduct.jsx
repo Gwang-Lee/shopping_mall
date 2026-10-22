@@ -39,7 +39,7 @@ const AddProduct = () => {
         }
 
         // 가격 필드 검증
-        if(formData.price < 0){
+        if(!Number.isFinite(Number(formData.price)) || Number(formData.price) <= 0){
             alert("가격은 0보다 큰 숫자를 입력하세요");
             return;
         }
@@ -50,7 +50,8 @@ const AddProduct = () => {
             alert("상품이 등록되었습니다.");
             navigate("/products");  //상품 등록 후 목록 페이지로 이동
         } catch (error) {
-            alert("상품 등록 중 오류가 발생했습니다.")
+            const message = error.response?.data?.message;
+            alert(message || "상품 등록 요청에 실패했습니다. 백엔드 URL과 서버 상태를 확인하세요.");
         }
 
     } //handleSubmit() 닫기

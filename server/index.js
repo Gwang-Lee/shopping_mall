@@ -86,15 +86,29 @@ app.use(express.json());
 // 상품 등록
 app.post("/api/products", (req, res) => {
     const {productName, price, description} = req.body; // 요청한 속성 데이터
+    const numericPrice = Number(price);
+
+    if (
+        typeof productName !== "string" ||
+        !productName.trim() ||
+        !Number.isFinite(numericPrice) ||
+        numericPrice <= 0 ||
+        typeof description !== "string" ||
+        !description.trim()
+    ) {
+        res.status(400).json({ message: "상품명, 0보다 큰 가격, 상품 설명을 확인하세요." });
+        return;
+    }
+
     const sql = "INSERT INTO product(product_name, price, description) "
          + "VALUES ($1, $2, $3)";
-    db.query(sql, [productName, price, description], (err) => {
+    db.query(sql, [productName.trim(), numericPrice, description.trim()], (err) => {
         if(err){
-            console.log("상품 조회 오류!! ", err);
-            res.send("상품 조회 중 오류 발생!!");
+            console.log("상품 등록 오류!! ", err);
+            res.status(500).json({ message: "상품 등록 중 데이터베이스 오류가 발생했습니다." });
             return;
         }
-        res.send("상품 등록 완료!!");
+        res.status(201).json({ message: "상품 등록 완료!!" });
     } );
 })
 
