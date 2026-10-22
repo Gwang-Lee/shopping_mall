@@ -150,7 +150,7 @@ app.get("/api/users", (req, res) => {
             res.send("회원 조회 중 오류가 발생했습니다.")
             return;
         }
-        res.json(result.rows[0]); // 프런트(요청)에 반환
+        res.json(result.rows); // 프런트(요청)에 반환
     });
 })
 
