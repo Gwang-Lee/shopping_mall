@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Header from './layouts/Header'
@@ -6,7 +7,6 @@ import AddProduct from './products/AddProduct'
 import ProductInfo from './products/ProductInfo'
 import ProductList from './products/ProductList'
 import UpdateProduct from './products/UpdateProduct'
-import { useState } from 'react'
 import SignIn from './users/SignIn'
 import SignUp from './users/SignUp'
 
