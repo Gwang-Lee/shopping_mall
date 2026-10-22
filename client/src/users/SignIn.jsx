@@ -30,16 +30,26 @@ const SignIn = ({onLogin}) => {
         // 유효성 검사 
         if(!username.trim() || !password.trim()){
             alert("모든 항목을 입력하세요.");
+            return;
         }
 
         // 서버에 로그인 요청
         try {
             const response = await api.get(`/users/${username}`);
-            console.log(response);
+            if (typeof response.data === "string") {
+                setLoginResult("api-error");
+                return;
+            }
+
             // 아이디 있음(user.username)
             const user = response.data; // 서버에서 받아온 사용자 정보
+            if (user && (typeof user !== "object" || typeof user.password !== "string")) {
+                setLoginResult("api-error");
+                return;
+            }
+
             // 비밀번호 확인(db에 있는 비번과 외부에서 입력한 비번)
-            if(user.password === password){
+            if(user && user.password === password){
                 setLoginResult("success");
                 // 로그인 성공시 부모컴포넌트(App.jsx)에 로그인 상태 저장
                 onLogin(user.username);
@@ -88,6 +98,11 @@ const SignIn = ({onLogin}) => {
             </p>
             {loginResult === "fail" && (
                 <p style={{color: "red"}}>아이디 또는 비밀번호가 일치하지 않습니다.</p>
+            )}
+            {loginResult === "api-error" && (
+                <p style={{color: "red"}}>
+                    로그인 서버 응답이 올바르지 않습니다. Render의 VITE_API_URL이 백엔드 주소와 /api 경로를 포함하는지 확인하세요.
+                </p>
             )}
         </div>
     )
