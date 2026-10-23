@@ -33,8 +33,11 @@
 /* 상품 목록 스타일 */
 .product-list .search-bar input{
   width: 300px;
-  padding: 6px 12px;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
 }
+
 .product-list table{
   width: 60%;
   margin: 20px auto;
@@ -69,6 +72,7 @@
 }
 .product-info button{
   padding: 6px 12px;
+  margin: 5px;
   cursor: pointer;
 }
 
@@ -184,4 +188,37 @@
 .sign-up form button{
   padding: 8px 16px;
   margin: 5px;
+}
+
+/* 관리자 페이지 스타일 */
+.admin-cards{
+  display: flex;
+  gap: 16px;
+  margin: 20px auto;
+}
+.admin-card{
+  flex: 1; /* 동일한 너비로 배분 */
+  padding: 16px;
+  background-color: rgb(2, 175, 2);
+  color: #ebeaea;
+  border-radius: 8px;
+}
+.admin-card:hover{
+  background-color: rgb(15, 129, 15);
+}
+.admin-card p{
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.admin-page table{
+  width: 100%;
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+}
+.admin-page th, td{
+  border: 1px solid #ccc;
+  padding: 6px;
+}
+.admin-page thead{
+  background-color: #eee;
 }
